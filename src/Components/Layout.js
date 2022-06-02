@@ -1,19 +1,11 @@
 import React from "react";
+import Header from "./Header";
 
 const Layout = (props) => {
   const { children } = props;
   return (
     <div>
-      <header
-        style={{
-          background: "red",
-          width: "100%",
-          padding: "20px",
-        }}
-      >
-        This is the header
-      </header>
-      {/* <div>This is where the body of the page will be</div> */}
+      <Header />
       <div>{children}</div>
     </div>
   );
