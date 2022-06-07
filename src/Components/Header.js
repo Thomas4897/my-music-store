@@ -1,14 +1,23 @@
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import {
   AppBar,
-  Box,
+  Badge,
   Button,
   IconButton,
   Toolbar,
   Typography,
 } from "@mui/material";
+import { Box } from "@mui/system";
+import { useContext } from "react";
+import { shoppingCartContext } from "../App";
 
 const Header = () => {
+  const { shoppingCart } = useContext(shoppingCartContext);
+
+  const itemQuantity = shoppingCart.reduce((acc, cartItem) => {
+    return acc + cartItem.quantity;
+  }, 0);
+
   return (
     <AppBar position="static" color="secondary">
       <Toolbar>
@@ -17,17 +26,17 @@ const Header = () => {
         </Typography>
         <Box mr={2}>
           <Button variant="contained" color="primary">
-            SIGN IN
+            Sign In
           </Button>
         </Box>
         <IconButton
           size="large"
-          aria-label="account of current user"
-          aria-controls="menu-appbar"
-          aria-haspopup="true"
+          aria-label="Go to shopping cart"
           color="inherit"
         >
-          <ShoppingCartOutlinedIcon />
+          <Badge badgeContent={itemQuantity} color="primary">
+            <ShoppingCartIcon />
+          </Badge>
         </IconButton>
       </Toolbar>
     </AppBar>
