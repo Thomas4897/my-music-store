@@ -1,13 +1,15 @@
+import { Box } from "@mui/material";
 import React from "react";
 import Header from "./Header";
 
 const Layout = (props) => {
   const { children } = props;
+
   return (
-    <div>
+    <Box minWidth={320}>
       <Header />
       <div>{children}</div>
-    </div>
+    </Box>
   );
 };
 

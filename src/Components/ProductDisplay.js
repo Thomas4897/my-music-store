@@ -1,28 +1,33 @@
-import { Box } from "@mui/system";
-import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
-import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
+import AddIcon from "@mui/icons-material/Add";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { Button } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardHeader from "@mui/material/CardHeader";
+import CardMedia from "@mui/material/CardMedia";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import { Box } from "@mui/system";
+import * as React from "react";
+import { shoppingCartContext } from "../App";
+import { useContext } from "react";
 
 const ProductDisplay = (props) => {
-  const {
-    product: { id, title, description, brand, price, image },
-  } = props;
+  const { addToCart } = useContext(shoppingCartContext);
+
+  const { product } = props;
+
+  const { title, description, brand, price, image } = product;
 
   return (
     <Card>
       <CardHeader
-        action={<Typography fontWeight="bold">${price / 100}</Typography>}
         title={title}
         subheader={brand}
+        action={<Typography fontWeight="bold">${price / 100}</Typography>}
       />
-      <CardMedia component="img" height="300" image={image} alt="Paella dish" />
+      <CardMedia component="img" height="260" image={image} alt="Paella dish" />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
           {description}
@@ -30,8 +35,12 @@ const ProductDisplay = (props) => {
       </CardContent>
       <CardActions disableSpacing>
         <Box display="flex" justifyContent="space-between" width="100%">
-          <Button variant="outlined" startIcon={<AddIcon />}>
-            ADD TO CART
+          <Button
+            variant="outlined"
+            startIcon={<AddIcon />}
+            onClick={() => addToCart(product)}
+          >
+            Add to cart
           </Button>
           <IconButton aria-label="add to favorites">
             <FavoriteIcon />
