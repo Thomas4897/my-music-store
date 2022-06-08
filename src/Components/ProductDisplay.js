@@ -9,11 +9,10 @@ import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { useContext } from 'react';
-import { shoppingCartContext } from '../context/shoppingCartContext';
+import { useShoppingCart } from '../context/shoppingCartContext';
 
 function ProductDisplay(props) {
-  const { addToCart } = useContext(shoppingCartContext);
+  const { addToCart } = useShoppingCart();
 
   const { product } = props;
 

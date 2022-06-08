@@ -1,6 +1,8 @@
-import React, { useState, createContext } from 'react';
+import React, { useState, createContext, useContext } from 'react';
 
 export const shoppingCartContext = createContext();
+
+export const useShoppingCart = () => useContext(shoppingCartContext);
 
 //! This component is to handle everything that relates to the shopping cart
 //! This will keep the App.js file cleaner
@@ -57,8 +59,10 @@ function ShoppingCartProvider(props) {
     setShoppingCart(newShoppingCart);
   };
 
+  const emptyCart = () => setShoppingCart([]);
+
   return (
-    <shoppingCartContext.Provider value={{ shoppingCart, addToCart, removeFromCart }}>
+    <shoppingCartContext.Provider value={{ shoppingCart, addToCart, removeFromCart, emptyCart }}>
       {children}
     </shoppingCartContext.Provider>
   );

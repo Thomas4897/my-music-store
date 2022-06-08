@@ -1,35 +1,51 @@
-import React, { useContext } from 'react';
-import { Box } from '@mui/material';
+import React from 'react';
+import { Box, Button } from '@mui/material';
+import ReplayIcon from '@mui/icons-material/Replay';
+import HomeIcon from '@mui/icons-material/Home';
 import Layout from '../Layout';
-import { shoppingCartContext } from '../../context/shoppingCartContext';
+import { useShoppingCart } from '../../context/shoppingCartContext';
+import CartItem from './CartItem';
 
 function CartPage() {
-  const { shoppingCart, removeFromCart } = useContext(shoppingCartContext);
+  const { shoppingCart, emptyCart } = useShoppingCart();
   // We want to display whats in the shopping cart.
   return (
     <Layout shoppingCart={shoppingCart}>
       <Box width={1} display="flex" flexDirection="column" alignItems="center">
         {shoppingCart.map((cartItem) => (
-          <Box p={3} key={cartItem.id}>
-            <Box>
-              {cartItem.title}
-              {' '}
-              - Qty:
-              {cartItem.quantity}
-              {' '}
-              - $
-              {cartItem.price / 100}
-              {' '}
-              total$:
-              {cartItem.total / 100}
-            </Box>
-            <Box>
-              <button type="button" onClick={() => removeFromCart(cartItem.id)}>
-                Remove From Cart
-              </button>
-            </Box>
+          <Box p={3} key={cartItem.id} width="100%" maxWidth={500}>
+            <CartItem cartItem={cartItem} />
           </Box>
         ))}
+        <Box>
+          <Box mb={3}>
+            <Button
+              fullWidth
+              variant="contained"
+            >
+              Checkout
+            </Button>
+          </Box>
+          <Box mb={3}>
+            <Button
+              fullWidth
+              variant="contained"
+              startIcon={<ReplayIcon />}
+              onClick={emptyCart}
+            >
+              Empty Cart
+            </Button>
+          </Box>
+          <Box mb={3}>
+            <Button
+              fullWidth
+              variant="contained"
+              startIcon={<HomeIcon />}
+            >
+              Home
+            </Button>
+          </Box>
+        </Box>
       </Box>
     </Layout>
   );

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import {
   AppBar,
@@ -9,10 +9,10 @@ import {
   Typography,
   Box,
 } from '@mui/material';
-import { shoppingCartContext } from '../context/shoppingCartContext';
+import { useShoppingCart } from '../context/shoppingCartContext';
 
 function Header() {
-  const { shoppingCart } = useContext(shoppingCartContext);
+  const { shoppingCart } = useShoppingCart();
 
   const itemQuantity = shoppingCart.reduce((acc, cartItem) => acc + cartItem.quantity, 0);
 
