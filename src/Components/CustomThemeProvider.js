@@ -1,7 +1,8 @@
-import { createTheme, ThemeProvider } from "@mui/material";
+import React from 'react';
+import { createTheme, ThemeProvider } from '@mui/material';
 
-const PURPLE = "#6750A4";
-const BLACK = "#1C1B1F";
+const PURPLE = '#6750A4';
+const BLACK = '#1C1B1F';
 
 const THEME = createTheme({
   palette: {
@@ -16,18 +17,18 @@ const THEME = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: "25px",
-          fontSize: ".875rem",
+          borderRadius: '25px',
+          fontSize: '.875rem',
         },
       },
     },
   },
 });
 
-const CustomThemeProvider = (props) => {
+function CustomThemeProvider(props) {
   const { children } = props;
 
   return <ThemeProvider theme={THEME}>{children}</ThemeProvider>;
-};
+}
 
 export default CustomThemeProvider;

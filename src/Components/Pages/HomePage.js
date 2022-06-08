@@ -1,17 +1,17 @@
-import { Box } from "@mui/material";
-import { useEffect, useState } from "react";
-import { fetchProductData } from "../../dataFetching";
-import Layout from "../Layout";
-import ProductDisplay from "../ProductDisplay";
+import React, { useEffect, useState } from 'react';
+import { Box } from '@mui/material';
+import { fetchProductData } from '../../dataFetching';
+import Layout from '../Layout';
+import ProductDisplay from '../ProductDisplay';
 
-const HomePage = () => {
+function HomePage() {
   const [productData, setProductData] = useState([]);
 
   // This is what runs after the first render:
   useEffect(() => {
     fetchProductData()
       .then((data) => setProductData(data))
-      .catch((error) => console.log("error: ", error));
+      .catch((error) => console.log('error: ', error));
   }, []);
 
   return (
@@ -25,6 +25,6 @@ const HomePage = () => {
       </Box>
     </Layout>
   );
-};
+}
 
 export default HomePage;

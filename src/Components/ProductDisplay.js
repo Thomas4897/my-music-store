@@ -1,31 +1,36 @@
-import AddIcon from "@mui/icons-material/Add";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import { Button } from "@mui/material";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardHeader from "@mui/material/CardHeader";
-import CardMedia from "@mui/material/CardMedia";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import { Box } from "@mui/system";
-import * as React from "react";
-import { shoppingCartContext } from "../App";
-import { useContext } from "react";
+import * as React from 'react';
+import AddIcon from '@mui/icons-material/Add';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import { Button, Box } from '@mui/material';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardHeader from '@mui/material/CardHeader';
+import CardMedia from '@mui/material/CardMedia';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import { useShoppingCart } from '../context/shoppingCartContext';
 
-const ProductDisplay = (props) => {
-  const { addToCart } = useContext(shoppingCartContext);
+function ProductDisplay(props) {
+  const { addToCart } = useShoppingCart();
 
   const { product } = props;
 
-  const { title, description, brand, price, image } = product;
+  const {
+    title, description, brand, price, image,
+  } = product;
 
   return (
     <Card>
       <CardHeader
         title={title}
         subheader={brand}
-        action={<Typography fontWeight="bold">${price / 100}</Typography>}
+        action={(
+          <Typography fontWeight="bold">
+            $
+            {price / 100}
+          </Typography>
+)}
       />
       <CardMedia component="img" height="260" image={image} alt="Paella dish" />
       <CardContent>
@@ -49,6 +54,6 @@ const ProductDisplay = (props) => {
       </CardActions>
     </Card>
   );
-};
+}
 
 export default ProductDisplay;

@@ -1,30 +1,54 @@
-import { Box } from "@mui/material";
-import Layout from "../Layout";
-import { shoppingCartContext } from "../../App";
-import { useContext } from "react";
+import React from 'react';
+import { Box, Button } from '@mui/material';
+import ReplayIcon from '@mui/icons-material/Replay';
+import HomeIcon from '@mui/icons-material/Home';
+import Layout from '../Layout';
+import { useShoppingCart } from '../../context/shoppingCartContext';
+import CartItem from './CartItem';
 
-const CartPage = () => {
-  const { shoppingCart, removeFromCart } = useContext(shoppingCartContext);
+function CartPage() {
+  const { shoppingCart, emptyCart } = useShoppingCart();
   // We want to display whats in the shopping cart.
   return (
     <Layout shoppingCart={shoppingCart}>
       <Box width={1} display="flex" flexDirection="column" alignItems="center">
         {shoppingCart.map((cartItem) => (
-          <Box p={3}>
-            <Box p={3}>
-              {cartItem.title} - Qty: {cartItem.quantity} - $
-              {cartItem.price / 100} total$: {cartItem.total / 100}
-            </Box>
-            <Box>
-              <button onClick={() => removeFromCart(cartItem.id)}>
-                Remove From Cart
-              </button>
-            </Box>
+          <Box p={3} key={cartItem.id} width="100%" maxWidth={500}>
+            <CartItem cartItem={cartItem} />
           </Box>
         ))}
+        <Box>
+          <Box mb={3}>
+            <Button
+              fullWidth
+              variant="contained"
+            >
+              Checkout
+            </Button>
+          </Box>
+          <Box mb={3}>
+            <Button
+              fullWidth
+              variant="contained"
+              startIcon={<ReplayIcon />}
+              onClick={emptyCart}
+            >
+              Empty Cart
+            </Button>
+          </Box>
+          <Box mb={3}>
+            <Button
+              fullWidth
+              variant="contained"
+              startIcon={<HomeIcon />}
+            >
+              Home
+            </Button>
+          </Box>
+        </Box>
       </Box>
     </Layout>
   );
-};
+}
 
 export default CartPage;

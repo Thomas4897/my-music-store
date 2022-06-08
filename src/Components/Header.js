@@ -1,4 +1,5 @@
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import React from 'react';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import {
   AppBar,
   Badge,
@@ -6,17 +7,14 @@ import {
   IconButton,
   Toolbar,
   Typography,
-} from "@mui/material";
-import { Box } from "@mui/system";
-import { useContext } from "react";
-import { shoppingCartContext } from "../App";
+  Box,
+} from '@mui/material';
+import { useShoppingCart } from '../context/shoppingCartContext';
 
-const Header = () => {
-  const { shoppingCart } = useContext(shoppingCartContext);
+function Header() {
+  const { shoppingCart } = useShoppingCart();
 
-  const itemQuantity = shoppingCart.reduce((acc, cartItem) => {
-    return acc + cartItem.quantity;
-  }, 0);
+  const itemQuantity = shoppingCart.reduce((acc, cartItem) => acc + cartItem.quantity, 0);
 
   return (
     <AppBar position="static" color="secondary">
@@ -41,6 +39,6 @@ const Header = () => {
       </Toolbar>
     </AppBar>
   );
-};
+}
 
 export default Header;
